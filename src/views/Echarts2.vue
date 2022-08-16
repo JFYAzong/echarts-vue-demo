@@ -1,9 +1,66 @@
-<script setup></script>
+<script setup>
+import * as echarts from "echarts";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  var chartDom = document.getElementById("main");
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  option = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: "40",
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 1048, name: "Search Engine" },
+          { value: 735, name: "Direct" },
+          { value: 580, name: "Email" },
+          { value: 484, name: "Union Ads" },
+        ],
+      },
+    ],
+  };
+
+  option && myChart.setOption(option);
+});
+</script>
 
 <template>
-<div>test</div>
+  <div class="echarts" id="main"></div>
 </template>
 
 <style scoped>
-
+.echarts {
+  width: 600px;
+  height: 400px;
+}
 </style>
